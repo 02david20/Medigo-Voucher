@@ -1,0 +1,34 @@
+<div class="p-5">
+    <table class="table-auto border-2 w-full">
+        <thead>
+            <tr class="border-b">
+                <td>
+                    Giảm 90% cho lần đầu tư vấn bác sỹ
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="border-b">
+              <td>Mã code</td>
+              <td>{{voucher.code}}</td>
+            </tr>
+            <tr class="border-b">
+              <td>Ngày tạo</td>
+              <td>{{voucher.create_at}} </td>
+            </tr>
+            <tr class="border-b">
+                <td>Trạng thái</td>
+                <td>{{voucher.voucher_state.value}}</td>
+            </tr>
+        </tbody>
+        <div *ngIf="cookieService.check('jwt')" class="space-x-1 flex flex-col md:flex-row">
+            <button 
+                class="bg-blue-400 btn-primary m-1"
+                (click) = "toDetail()"
+            >Xem chi tiết mã code</button>    
+            <button class="bg-blue-600 btn-primary m-1"
+                (click) = "toggleState()"
+            >Tắt mã</button>        
+        </div>
+    </table>
+</div>

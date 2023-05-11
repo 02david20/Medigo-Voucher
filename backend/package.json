@@ -1,0 +1,60 @@
+{
+  "name": "backend",
+  "version": "0.0.1",
+  "description": "backend",
+  "keywords": [
+    "loopback-application",
+    "loopback"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "engines": {
+    "node": "14 || 16 || 18 || 19"
+  },
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "clean": "rimraf --glob dist *.tsbuildinfo .eslintcache",
+    "pretest": "npm run rebuild",
+    "openapi-spec": "node ./dist/openapi-spec",
+    "prestart": "npm run rebuild",
+    "start:watch": "tsc-watch -b --onSuccess \"node .\"",
+    "prepare": "npm run build",
+    "rebuild": "npm run clean && npm run build",
+    "start": "pm2 start ecosystem.config.js --env production",
+    "stop": "pm2 stop ecosystem.config.js --env production"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "author": "david <davidhuynh0222@gmail.com>",
+  "license": "",
+  "files": [
+    "README.md",
+    "dist",
+    "src",
+    "!*/__tests__"
+  ],
+  "dependencies": {
+    "@loopback/authentication": "^9.0.10",
+    "@loopback/authentication-jwt": "^0.12.10",
+    "@loopback/boot": "^5.0.10",
+    "@loopback/core": "^4.0.10",
+    "@loopback/repository": "^5.1.5",
+    "@loopback/rest": "^12.0.10",
+    "@loopback/rest-explorer": "^5.0.10",
+    "bcryptjs": "^2.4.3",
+    "loopback-connector-mysql": "^5.4.4",
+    "pm2": "^5.3.0",
+    "tslib": "^2.0.0"
+  },
+  "devDependencies": {
+    "@loopback/build": "^9.0.10",
+    "@loopback/testlab": "^5.0.10",
+    "@types/node": "^14.18.42",
+    "rimraf": "^5.0.0",
+    "source-map-support": "^0.5.21",
+    "tsc-watch": "^6.0.4",
+    "typescript": "~4.9.5"
+  }
+}

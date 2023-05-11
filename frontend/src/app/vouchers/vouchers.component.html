@@ -1,0 +1,60 @@
+<h1 class="text-3xl font-bold underline">
+    Voucher Information
+</h1>
+<div class="flex justify-end">
+    
+    <button *ngIf="!cookieService.check('jwt')" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium text-sm px-20 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    (click) = "toLogin()"
+    >Sign in</button>
+
+    <button *ngIf="cookieService.check('jwt')" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+    (click) = "logout()"
+    >Logout</button>
+
+    <input 
+        class="mr-2 block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        type="number" id="offset" name="offset" min = 1 [formControl]="offsetForm"  
+        style="max-width: fit-content;"
+        (change) = "update()"  
+    >
+    <button class="bg-green-500 p-2 text-white mr-10" (click)="createVoucher()">Thêm mã khuyến mãi</button>
+</div>
+<div class="flex flex-wrap justify-center">
+    <app-voucher *ngFor="let voucher of voucherList" [voucher]="voucher"></app-voucher>
+</div>
+
+<nav aria-label="Page navigation example" class="flex justify-center mt-10">
+    <ul class="inline-flex items-center -space-x-px">
+        <li
+            (click) = "chosen-1 >= 0 && getPage(pageOffset[chosen-1])"
+        >
+            <a href="javascript:void(0)" class="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+              <span class="sr-only">Previous</span>
+              <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+            </a>
+        </li>
+        <li *ngFor="let offset of pageOffset; let i = index"
+            (click)="getPage(offset)"
+        >
+            <a  
+            [ngClass]="
+            
+                chosen !== i 
+                ? 'px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+                : 'z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white'
+            "
+            
+            >{{i+1}}</a>
+        </li>
+        <li
+            (click) = "chosen+1 < pageOffset.length && getPage(pageOffset[chosen+1])"
+        >
+            <a href="javascript:void(0)" class="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+              <span class="sr-only">Next</span>
+              <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+

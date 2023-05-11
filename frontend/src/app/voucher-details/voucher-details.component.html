@@ -1,0 +1,55 @@
+<h1 class="text-3xl font-bold underline">Chỉnh sửa thông tin voucher</h1>
+<section class = "flex justify-center">
+    <form 
+        class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        [formGroup]="applyForm" (submit)="submitForm"
+    >
+    <div class="grid grid-cols-2 gap-4">
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="code">Kind</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+            id="code" type="text" formControlName="kind">
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="code">Code</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+            id="code" type="text" formControlName="code">
+        </div>
+        
+        <mat-form-field>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="startdate">Start</label>
+            <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" [formControl]="startControl"
+              [min]="minDate" [max]="maxDate" [disabled]="disabled" id="startdate">
+            <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+              [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="touchUi"
+              [color]="color" [enableMeridian]="enableMeridian">
+            </ngx-mat-datetime-picker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="enddate">End</label>
+            <input matInput [ngxMatDatetimePicker]="picker1" placeholder="Choose a date" [formControl]="endControl"
+              [min]="minDate" [max]="maxDate" [disabled]="disabled" id="enddate">
+            <mat-datepicker-toggle matSuffix [for]="$any(picker1)"></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #picker1 [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+              [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="touchUi"
+              [color]="color" [enableMeridian]="enableMeridian">
+            </ngx-mat-datetime-picker>
+        </mat-form-field>
+  
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="kind">Max Use</label>
+            <input 
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+            id="kind" type="text" formControlName="maxUse">
+        </div>
+    </div>
+
+      <button 
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+      type="submit"
+      (click)="submitForm()">Apply now</button>
+    </form>
+</section>
